@@ -1,0 +1,61 @@
+#EXTM3U
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Bula FM 102.0 (Suva)
+http://peridot.streamguys.com:7150/Bula
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",FM 96 (Suva)
+http://192.111.142.176:8000/FM96
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Mirchi FM 97.8 (Suva)
+http://peridot.streamguys.com:7150/Mirchi
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Radio 2Day FM (Suva)
+http://peridot.streamguys.com:7150/2Day
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Radio Fiji GOLD FM 100.4 (Suva)
+http://peridot.streamguys.com:7150/Gold
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Radio Fiji ONE FM 107.4 (Suva)
+http://peridot.streamguys.com:7150/RFOne
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Radio Fiji Two (Suva)
+http://peridot.streamguys.com:7150/RFTwo
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Radio Navtarang FM 101 (Suva)
+http://192.111.142.176:8000/NAVTARANG
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Radio Sargam (Suva)
+http://192.111.142.176:8000/SARGAM
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Viti FM 102.8 (Suva)
+http://192.111.142.176:8000/VITIFM
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Switch FM 106.8 (Gisborne)
+https://s3.radio.co/s3620d3fd0/listen
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Switch FM 87.9 (Gisborne)
+http://s8.myradiostream.com:56886/listen.m4a
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Russia (RU)",Radio Purga (Anadyr)
+http://109.197.144.84:8000/live
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="Fiji (FJ)",Mix FM 93.8 (Lautoka)
+http://fijiradio.net:8000/live
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Radio Bay FM 100.7 (Hastings)
+http://s38.myradiostream.com:8876/;;
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Radio Kidnappers (Hastings)
+http://pebbles.wizzhosting.co.nz/rk
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Kiss FM 106.9 (Tauranga)
+http://tunein-icecast.mediaworks.nz/rock_128kbps
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Cool Blue Taupo FM 107.5 (Taupo)
+http://37.59.28.208:8166/stream
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",The Chill (Taupo)
+http://media-sov.musicradio.com/Chill
+
+#EXTINF:-1 radio="true" tvg-logo="" group-title="New Zealand (NZ)",Ski FM (Taupo)
+http://s2.radio.co/s6436891bc/listen

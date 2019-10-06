@@ -1,0 +1,402 @@
+[
+    {
+        "id": "LcTyJeRx",
+        "name": "Bula FM 102.0",
+        "slug": "bula-fm-102-0",
+        "website": "http://bulafm.fbc.com.fj/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://peridot.streamguys.com:7150/Bula"
+    },
+    {
+        "id": "xml1MAa5",
+        "name": "FM 96",
+        "slug": "fm-96",
+        "website": "https://fijivillage.com/fm96/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://192.111.142.176:8000/FM96"
+    },
+    {
+        "id": "tkBhjLEk",
+        "name": "Mirchi FM 97.8",
+        "slug": "mirchi-fm-97-8",
+        "website": "http://mirchifm.fbc.com.fj/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://peridot.streamguys.com:7150/Mirchi"
+    },
+    {
+        "id": "yZvnVHFS",
+        "name": "Radio 2Day FM",
+        "slug": "radio-2day-fm",
+        "website": "http://2dayfm.fbc.com.fj/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://peridot.streamguys.com:7150/2Day"
+    },
+    {
+        "id": "BrEFxn5n",
+        "name": "Radio Fiji GOLD FM 100.4",
+        "slug": "radio-fiji-gold-fm-100-4",
+        "website": "http://goldfm.fbc.com.fj/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://peridot.streamguys.com:7150/Gold"
+    },
+    {
+        "id": "EJsyacaD",
+        "name": "Radio Fiji ONE FM 107.4",
+        "slug": "radio-fiji-one-fm-107-4",
+        "website": "http://rf1.fbc.com.fj/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://peridot.streamguys.com:7150/RFOne"
+    },
+    {
+        "id": "lxTrNA6S",
+        "name": "Radio Fiji Two",
+        "slug": "radio-fiji-two",
+        "website": "http://rf2.fbc.com.fj/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://peridot.streamguys.com:7150/RFTwo"
+    },
+    {
+        "id": "xsnmPbga",
+        "name": "Radio Navtarang FM 101",
+        "slug": "radio-navtarang-fm-101",
+        "website": "https://fijivillage.com/navtarang/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://192.111.142.176:8000/NAVTARANG"
+    },
+    {
+        "id": "CCkPkwAP",
+        "name": "Radio Sargam",
+        "slug": "radio-sargam-fm-96-0",
+        "website": "https://fijivillage.com/radiosargam/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://192.111.142.176:8000/SARGAM"
+    },
+    {
+        "id": "kJtLEHUh",
+        "name": "Viti FM 102.8",
+        "slug": "viti-fm-102-8",
+        "website": "https://fijivillage.com/vitifm/",
+        "place": {
+            "name": "Suva",
+            "geo": [
+                178.4500789,
+                -18.1248086
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://192.111.142.176:8000/VITIFM"
+    },
+    {
+        "id": "TdD8V8Os",
+        "name": "Switch FM 106.8",
+        "slug": "switch-fm-106-8",
+        "website": "https://www.facebook.com/spellboundradio/",
+        "place": {
+            "name": "Gisborne",
+            "geo": [
+                178.017649,
+                -38.662334
+            ]
+        },
+        "functioning": true,
+        "secure": true,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "https://s3.radio.co/s3620d3fd0/listen"
+    },
+    {
+        "id": "HtADw4-B",
+        "name": "Switch FM 87.9",
+        "slug": "switch-fm-87-9",
+        "website": "http://www.theswitch.co.nz",
+        "place": {
+            "name": "Gisborne",
+            "geo": [
+                178.017649,
+                -38.662334
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://s8.myradiostream.com:56886/listen.m4a"
+    },
+    {
+        "id": "ayDGxMXR",
+        "name": "Radio Purga",
+        "slug": "radio-purga",
+        "website": "http://radiopurga.org",
+        "place": {
+            "name": "Anadyr",
+            "geo": [
+                177.49682659999996,
+                64.7336613
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Russia",
+            "code": "RU"
+        },
+        "mp3": "http://109.197.144.84:8000/live"
+    },
+    {
+        "id": "fTB1NGm0",
+        "name": "Mix FM 93.8",
+        "slug": "mix-fm-93-8",
+        "website": "https://mix.com.fj/",
+        "place": {
+            "name": "Lautoka",
+            "geo": [
+                177.4504888,
+                -17.6169957
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "Fiji",
+            "code": "FJ"
+        },
+        "mp3": "http://fijiradio.net:8000/live"
+    },
+    {
+        "id": "XeC94ir4",
+        "name": "Radio Bay FM 100.7",
+        "slug": "radio-bay-fm-100-7",
+        "website": "http://www.radiobayfm.co.nz/",
+        "place": {
+            "name": "Hastings",
+            "geo": [
+                176.8392322,
+                -39.6395783
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://s38.myradiostream.com:8876/;;"
+    },
+    {
+        "id": "gGoBULyu",
+        "name": "Radio Kidnappers",
+        "slug": "radiokidnappers",
+        "website": "http://www.radiokidnappers.org.nz/",
+        "place": {
+            "name": "Hastings",
+            "geo": [
+                176.8392322,
+                -39.6395783
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://pebbles.wizzhosting.co.nz/rk"
+    },
+    {
+        "id": "WaTroSoa",
+        "name": "Kiss FM 106.9",
+        "slug": "kiss-fm-106-9",
+        "website": "http://www.kissfm.co.nz",
+        "place": {
+            "name": "Tauranga",
+            "geo": [
+                176.1651295,
+                -37.6877975
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://tunein-icecast.mediaworks.nz/rock_128kbps"
+    },
+    {
+        "id": "WAY5wY4x",
+        "name": "Cool Blue Taupo FM 107.5",
+        "slug": "cool-blue-taupo-fm-107-5",
+        "website": "https://www.coolbluetaupo.com/",
+        "place": {
+            "name": "Taupo",
+            "geo": [
+                176.0702098,
+                -38.6856924
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://37.59.28.208:8166/stream"
+    },
+    {
+        "id": "Ftrzc2Hy",
+        "name": "The Chill",
+        "slug": "helpmechill",
+        "website": "http://www.helpmechill.com/",
+        "place": {
+            "name": "Taupo",
+            "geo": [
+                176.0702098,
+                -38.6856924
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://media-sov.musicradio.com/Chill"
+    },
+    {
+        "id": "dbljyPGD",
+        "name": "Ski FM",
+        "slug": "ski-fm-network",
+        "website": "http://skifmnetwork.co.nz",
+        "place": {
+            "name": "Taupo",
+            "geo": [
+                176.0702098,
+                -38.6856924
+            ]
+        },
+        "functioning": true,
+        "secure": false,
+        "country": {
+            "name": "New Zealand",
+            "code": "NZ"
+        },
+        "mp3": "http://s2.radio.co/s6436891bc/listen"
+    }
+]
