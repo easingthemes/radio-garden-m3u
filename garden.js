@@ -261,7 +261,9 @@ function start(useBackup, group = GROUP, max = MAX) {
 }
 
 const handleMp3s = async (channels, max, group) => {
+    max = max || channels.length / group;
     try {
+        console.log('allMp3s channels: ', channels.length);
         const allMp3s = await bufferRequests(channels, getMp3, extractMp3Url, extractMp3Data, max, group);
         createM3uFile(allMp3s);
         createJsonFile(allMp3s, 'mp3s');
