@@ -1,0 +1,15 @@
+{
+  "name": "radio-garden-channels",
+  "version": "1.0.0",
+  "description": "",
+  "main": "garden.js",
+  "scripts": {
+    "fetch": "node ./garden.js"
+  },
+  "keywords": [],
+  "author": "Dragan Filipovic",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
