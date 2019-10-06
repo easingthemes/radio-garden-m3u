@@ -1,5 +1,6 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
+const AbortController = require('abort-controller');
 const backupChannels = require('./backup/radio.garden.channels.json');
 const URL_PLACES = 'https://radio.garden/api/content/places';
 const URL_PLACE = 'https://radio.garden/api/content/place/';
@@ -8,9 +9,9 @@ const extraParam = 'listening-from-radio-garden';
 const resultsFile = './radio.garden';
 
 // Max number of cycles
-const MAX = 10; // set to null to fetch all urls
+const MAX = null; // set to null to fetch all urls
 // Url per cycle
-const GROUP = 15;
+const GROUP = 199;
 // Use already downloaded list of places/channels (mp3 list not downloaded yet)
 const USE_BACKUP = true; // change to false to fetch new list of channels
 
@@ -124,13 +125,16 @@ const extractMp3Data = (data) => {
 
 const getMp3 = (url, json = {}, extractData) => {
     return new Promise((resolve, reject) => {
-        fetch(url)
+        const controller = new AbortController();
+
+        fetch(url, { signal: controller.signal })
             .then(resp => {
                 if (!resp.ok) {
                     console.log('STATUS: ', resp.status, 'URL: ', resp.url);
                 }
 
                 json.mp3 = removeUrlParam(resp.url, extraParam);
+                controller.abort();
                 return resolve(json);
             })
             .catch(err => {
@@ -154,12 +158,12 @@ createM3uFile = (allMp3s) => {
 
     const m3u = `#EXTM3U
 ${mp3s}`;
-
+    console.log('FILE: writing m3u file.');
     fs.writeFileSync(resultsFile + '.m3u', m3u);
 };
 
 createJsonFile = (data, name) => {
-    console.log('FILE: writing file ', name);
+    console.log('FILE: writing JSON file ', name);
     fs.writeFileSync(resultsFile + '.' + name + '.json', JSON.stringify(data, null, 4));
 };
 
@@ -192,6 +196,22 @@ function getPlaces(group, max) {
         });
 }
 
+function delayedLoop(func, delay = 500, loop = 10) {
+    function start(counter) {
+        func(counter);
+
+        if (counter < loop) {
+            setTimeout(function() {
+                counter++;
+                start(counter);
+            }, delay);
+        }
+    }
+
+    start(0);
+}
+
+
 const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, max, group) => {
     let requestBuffer = [];
     let counter = 0;
@@ -209,16 +229,19 @@ const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, ma
         }
 
         try {
-            await Promise.all(requestBuffer)
-                 .then(groupResponse => {
-                     const flattenedArray = [].concat(...groupResponse);
-                     console.log(i, '. GROUP: ', counter);
-                     allData.push(...flattenedArray);
-                     tmpData.push(...flattenedArray);
-                 })
-                 .catch(error => {
-                     console.log(i, '. GROUP: Promise all catch ', error);
-                 });
+            if (requestBuffer.length > 0) {
+                await Promise.all(requestBuffer)
+                     .then(groupResponse => {
+                         const flattenedArray = [].concat(...groupResponse);
+                         console.log(i, '. GROUP: ', counter);
+                         allData.push(...flattenedArray);
+                         tmpData.push(...flattenedArray);
+                     })
+                     .catch(error => {
+                         console.log(i, '. GROUP: Promise all catch ', error);
+                     });
+            }
+
         } catch (e) {
             console.log(i, '. GROUP: await Promise all catch ', error);
         }
@@ -242,7 +265,8 @@ const handleMp3s = async (channels, max, group) => {
         const allMp3s = await bufferRequests(channels, getMp3, extractMp3Url, extractMp3Data, max, group);
         createM3uFile(allMp3s);
         createJsonFile(allMp3s, 'mp3s');
-        console.log('allMp3s: ', allMp3s);
+        console.log('allMp3s: ', allMp3s.length);
+        process.exit();
     } catch (e) {
         console.log('ERROR: allMp3s ', e);
     }
