@@ -5,6 +5,23 @@ const URL_PLACE = 'https://radio.garden/api/content/place/';
 const MP3 = 'http://radio.garden/api/content/listen/';
 const extraParam = 'listening-from-radio-garden';
 const resultsFile = './radio.garden';
+const GROUP = 50;
+const MAX = null;
+
+const placeDefault =  {
+    id: 'ERROR',
+    name: 'ERROR',
+    slug: 'ERROR',
+    website: 'ERROR',
+    place: { name: 'ERROR', geo: [] },
+    functioning: true,
+    secure: false,
+    country: {
+        name: 'ERROR',
+        code: 'ERROR'
+    },
+    mp3: 'ERROR'
+};
 
 const removeUrlParam = (url, param) => {
     const urlObj = new URL(url);
@@ -54,17 +71,21 @@ const getPlace = (url, item, extractData, counter) => {
     return new Promise((resolve, reject) => {
         fetch(url)
             .then(resp => {
+                if (!resp.ok) {
+                    console.log('STATUS: ', resp.status, 'URL: ', resp.url);
+                }
+
                 if (resp.ok) {
                     return resp.json();
                 } else {
-                    reject();
+                    return resolve(placeDefault);
                 }
             })
             .then(json => {
                 return resolve(extractData(json));
             })
             .catch(err => {
-                reject();
+                return resolve(placeDefault);
             });
     });
 };
@@ -85,18 +106,16 @@ const getMp3 = (url, json = {}, extractData) => {
     return new Promise((resolve, reject) => {
         fetch(url)
             .then(resp => {
-                if (resp.ok) {
-                    json.mp3 = removeUrlParam(resp.url, extraParam);
-                    return resolve(json);
-                } else {
-                    json.mp3 = '';
-                    reject(json);
+                if (!resp.ok) {
+                    console.log('STATUS: ', resp.status, 'URL: ', resp.url);
                 }
-                // Skip body (eg toJson()), since it's live stream
+
+                json.mp3 = removeUrlParam(resp.url, extraParam);
+                return resolve(json);
             })
             .catch(err => {
                 json.mp3 = '';
-                reject(json);
+                return resolve(json);
             });
     });
 };
@@ -119,8 +138,8 @@ ${mp3s}`;
     fs.writeFileSync(resultsFile + '.m3u', m3u);
 };
 
-createJsonFile = (allMp3s) => {
-    fs.writeFileSync(resultsFile+ '.json', JSON.stringify(allMp3s, null, 4));
+createJsonFile = (data, name) => {
+    fs.writeFileSync(resultsFile + '.' + name + '.json', JSON.stringify(data, null, 4));
 };
 
 function getPlaces(group, max) {
@@ -130,22 +149,34 @@ function getPlaces(group, max) {
             const { list } = json.data.places;
             max = max || list.length / group;
             console.log('PLACES response', list.length);
+            createJsonFile(list, 'places');
 
-            const allChannels = await bufferRequests(list, getPlace, extractPlaceUrl, extractChannels, max, group);
-            console.log('allChannels', allChannels.length);
-            const allMp3s = await bufferRequests(allChannels, getMp3, extractMp3Url, extractMp3Data, max, group);
+            let allChannels;
+            try {
+                allChannels = await bufferRequests(list, getPlace, extractPlaceUrl, extractChannels, max, group);
+                console.log('allChannels', allChannels.length);
+                createJsonFile(allChannels, 'channels');
+            } catch (e) {
+                console.log('ERROR: allChannels ', e);
+            }
 
-            createJsonFile(allMp3s);
-            createM3uFile(allMp3s);
-
-            console.log('allMp3s: ', allMp3s);
+            if (allChannels) {
+                try {
+                    const allMp3s = await bufferRequests(allChannels, getMp3, extractMp3Url, extractMp3Data, max, group);
+                    createM3uFile(allMp3s);
+                    createJsonFile(allMp3s, 'mp3s');
+                    console.log('allMp3s: ', allMp3s);
+                } catch (e) {
+                    console.log('ERROR: allMp3s ', e);
+                }
+            }
         })
         .catch(error => {
             console.log('PLACES error', error);
         });
 }
 
-const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, max = 20, group = 5) => {
+const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, max, group) => {
     let requestBuffer = [];
     let counter = 0;
     let allData = [];
@@ -161,25 +192,44 @@ const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, ma
             counter++;
         }
 
-        await Promise.all(requestBuffer)
-            .then(groupResponse => {
-                const flattenedArray = [].concat(...groupResponse);
-                console.log(i, '. GROUP: ', counter);
-                allData.push(...flattenedArray);
-            })
-            .catch(error => {
-                console.log(i, '. GROUP: error ', error);
-            });
+        try {
+            await Promise.all(requestBuffer)
+                 .then(groupResponse => {
+                     const flattenedArray = [].concat(...groupResponse);
+                     console.log(i, '. GROUP: ', counter);
+                     allData.push(...flattenedArray);
+                 })
+                 .catch(error => {
+                     console.log(i, '. GROUP: Promise all catch ', error);
+                 });
+        } catch (e) {
+            console.log(i, '. GROUP: await Promise all catch ', error);
+        }
 
         requestBuffer.splice(0, requestBuffer.length);
     }
 
+    handleExit(allData);
+
     return allData;
 };
 
-function start(group, max) {
+function start(group = GROUP, max = MAX) {
     getPlaces(group, max);
 }
 
+const handleExit = (data) => {
+    process.stdin.resume();
 
-start(50);
+    function exitHandler() {
+        createJsonFile(data, 'backup');
+        process.exit();
+    }
+
+    process.on('SIGINT', exitHandler);
+    process.on('SIGUSR1', exitHandler);
+    process.on('SIGUSR2', exitHandler);
+    process.on('uncaughtException', exitHandler);
+};
+
+start(20);
