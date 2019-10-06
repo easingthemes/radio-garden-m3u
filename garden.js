@@ -7,9 +7,12 @@ const MP3 = 'http://radio.garden/api/content/listen/';
 const extraParam = 'listening-from-radio-garden';
 const resultsFile = './radio.garden';
 
-const MAX = null;
-const GROUP = 30;
-const USE_BACKUP = true;
+// Max number of cycles
+const MAX = 10; // set to null to fetch all urls
+// Url per cycle
+const GROUP = 15;
+// Use already downloaded list of places/channels (mp3 list not downloaded yet)
+const USE_BACKUP = true; // change to false to fetch new list of channels
 
 const placeDefault =  {
     id: 'ERROR',
@@ -25,6 +28,20 @@ const placeDefault =  {
     },
     mp3: 'ERROR'
 };
+
+let tmpData = [];
+
+process.stdin.resume();
+
+function exitHandler() {
+    createJsonFile(tmpData, 'backup');
+    process.exit();
+}
+
+process.on('SIGINT', exitHandler);
+process.on('SIGUSR1', exitHandler);
+process.on('SIGUSR2', exitHandler);
+process.on('uncaughtException', exitHandler);
 
 const removeUrlParam = (url, param) => {
     const urlObj = new URL(url);
@@ -142,6 +159,7 @@ ${mp3s}`;
 };
 
 createJsonFile = (data, name) => {
+    console.log('FILE: writing file ', name);
     fs.writeFileSync(resultsFile + '.' + name + '.json', JSON.stringify(data, null, 4));
 };
 
@@ -196,6 +214,7 @@ const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, ma
                      const flattenedArray = [].concat(...groupResponse);
                      console.log(i, '. GROUP: ', counter);
                      allData.push(...flattenedArray);
+                     tmpData.push(...flattenedArray);
                  })
                  .catch(error => {
                      console.log(i, '. GROUP: Promise all catch ', error);
@@ -206,8 +225,6 @@ const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, ma
 
         requestBuffer.splice(0, requestBuffer.length);
     }
-
-    handleExit(allData);
 
     return allData;
 };
@@ -229,20 +246,6 @@ const handleMp3s = async (channels, max, group) => {
     } catch (e) {
         console.log('ERROR: allMp3s ', e);
     }
-};
-
-const handleExit = (data) => {
-    process.stdin.resume();
-
-    function exitHandler() {
-        createJsonFile(data, 'backup');
-        process.exit();
-    }
-
-    process.on('SIGINT', exitHandler);
-    process.on('SIGUSR1', exitHandler);
-    process.on('SIGUSR2', exitHandler);
-    process.on('uncaughtException', exitHandler);
 };
 
 start(USE_BACKUP, GROUP);
