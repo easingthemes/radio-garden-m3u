@@ -1,6 +1,15 @@
-const fs = require('fs');
-const path = require('path');
+### 1. Requirements
+NodeJS v.10.x or higher. https://nodejs.org/en/download/
 
+### 2. Install dependencies
+
+```
+npm i
+```
+
+### 3. Update scripts/config.js if needed
+
+```
 // START Config_____________________________________________________________
 const RESULTS_FILENAME = 'radio.garden';
 const RESULTS_DIR = './results';
@@ -11,23 +20,10 @@ const GROUP_SIZE = 200;
 // Use already downloaded list of places/channels (mp3 list not downloaded yet)
 let USE_BACKUP = true; // change to false to fetch new list of channels
 // END Config ______________________________________________________________
+```
 
+### 4. Run script
 
-const channelsFilePath = path.resolve(`${RESULTS_DIR}/${RESULTS_FILENAME}.channels.json`);
-let CHANNELS_FILE = [];
-
-if (fs.existsSync(channelsFilePath)) {
-    CHANNELS_FILE = require(channelsFilePath);
-} else {
-    // Skip if no backup
-    USE_BACKUP = false;
-}
-
-module.exports = {
-    RESULTS_FILENAME,
-    RESULTS_DIR,
-    MAX_CYCLES,
-    GROUP_SIZE,
-    USE_BACKUP,
-    CHANNELS_FILE
-};
+```
+npm start
+```

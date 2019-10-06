@@ -4,7 +4,7 @@
   "description": "",
   "main": "garden.js",
   "scripts": {
-    "fetch": "node ./scripts/index.js"
+    "start": "node ./scripts/index.js"
   },
   "keywords": [],
   "author": "Dragan Filipovic",
