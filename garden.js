@@ -1,12 +1,15 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
+const backupChannels = require('./backup/radio.garden.channels.json');
 const URL_PLACES = 'https://radio.garden/api/content/places';
 const URL_PLACE = 'https://radio.garden/api/content/place/';
 const MP3 = 'http://radio.garden/api/content/listen/';
 const extraParam = 'listening-from-radio-garden';
 const resultsFile = './radio.garden';
-const GROUP = 50;
+
 const MAX = null;
+const GROUP = 30;
+const USE_BACKUP = true;
 
 const placeDefault =  {
     id: 'ERROR',
@@ -160,15 +163,10 @@ function getPlaces(group, max) {
                 console.log('ERROR: allChannels ', e);
             }
 
+            allChannels = allChannels || backupChannels;
+
             if (allChannels) {
-                try {
-                    const allMp3s = await bufferRequests(allChannels, getMp3, extractMp3Url, extractMp3Data, max, group);
-                    createM3uFile(allMp3s);
-                    createJsonFile(allMp3s, 'mp3s');
-                    console.log('allMp3s: ', allMp3s);
-                } catch (e) {
-                    console.log('ERROR: allMp3s ', e);
-                }
+                await handleMp3s(allChannels, max, group);
             }
         })
         .catch(error => {
@@ -214,9 +212,24 @@ const bufferRequests = async (list = [], oneRequest, extractUrl, extractData, ma
     return allData;
 };
 
-function start(group = GROUP, max = MAX) {
-    getPlaces(group, max);
+function start(useBackup, group = GROUP, max = MAX) {
+    if (useBackup) {
+        handleMp3s(backupChannels, max, group);
+    } else {
+        getPlaces(group, max);
+    }
 }
+
+const handleMp3s = async (channels, max, group) => {
+    try {
+        const allMp3s = await bufferRequests(channels, getMp3, extractMp3Url, extractMp3Data, max, group);
+        createM3uFile(allMp3s);
+        createJsonFile(allMp3s, 'mp3s');
+        console.log('allMp3s: ', allMp3s);
+    } catch (e) {
+        console.log('ERROR: allMp3s ', e);
+    }
+};
 
 const handleExit = (data) => {
     process.stdin.resume();
@@ -232,4 +245,4 @@ const handleExit = (data) => {
     process.on('uncaughtException', exitHandler);
 };
 
-start(20);
+start(USE_BACKUP, GROUP);
